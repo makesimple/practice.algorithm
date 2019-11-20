@@ -22,39 +22,39 @@ public:
 		mBoard = board;
 		return true;
 	}
-		int row = index / 9;
-		int col = index % 9;
-		int blockIndex = row / 3 * 3 + col / 3;
-		if (board[row][col] == '.') {
-			auto &rs = rowset[row];
-			auto &cs = colset[col];
-			auto &blk = blockset[blockIndex];
-			auto size = rs.size();
-			unordered_map<char, char> mincopy(rs);
-			bool result = false;
-			for (auto it = mincopy.begin();it != mincopy.end(); it++) {
-				if (cs.find(it->first) != cs.end() 
-					&& blk.find(it->first) != blk.end()) {
-					rs.erase(it->first);
-					cs.erase(it->first);
-					blk.erase(it->first);
-					char tmp = board[row][col];
-					board[row][col] = it->second;
-					// how return the value if many solutions exist and found them ?
-					if (solveSudokuRec(board, index + 1)) {
-						result = true;
-						break;
-					}
-					board[row][col] = tmp;	
-					rs.insert({it->first, it->second});
-					cs.insert({it->first, it->second});
-					blk.insert({it->first, it->second});
+	int row = index / 9;
+	int col = index % 9;
+	int blockIndex = row / 3 * 3 + col / 3;
+	if (board[row][col] == '.') {
+		auto &rs = rowset[row];
+		auto &cs = colset[col];
+		auto &blk = blockset[blockIndex];
+		auto size = rs.size();
+		unordered_map<char, char> mincopy(rs);
+		bool result = false;
+		for (auto it = mincopy.begin();it != mincopy.end(); it++) {
+			if (cs.find(it->first) != cs.end() 
+				&& blk.find(it->first) != blk.end()) {
+				rs.erase(it->first);
+				cs.erase(it->first);
+				blk.erase(it->first);
+				char tmp = board[row][col];
+				board[row][col] = it->second;
+				// how return the value if many solutions exist and found them ?
+				if (solveSudokuRec(board, index + 1)) {
+					result = true;
+					break;
 				}
+				board[row][col] = tmp;	
+				rs.insert({it->first, it->second});
+				cs.insert({it->first, it->second});
+				blk.insert({it->first, it->second});
 			}
-			return result;
-		} else {
-			return solveSudokuRec(board, index + 1);
 		}
+		return result;
+	} else {
+		return solveSudokuRec(board, index + 1);
+	}
     }
     void solveSudoku(vector<vector<char>>& board) {
 		colset = rowset;
