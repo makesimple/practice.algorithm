@@ -1,7 +1,7 @@
-template<int N>
+template <int N>
 void combination(std::string &str, std::string strset) {
     if (N == str.size()) {
-        std::cout<<str<<std::endl;
+        std::cout << str << std::endl;
     }
     for (int i = 0; i < strset.size(); i++) {
         str.push_back(strset[i]);
