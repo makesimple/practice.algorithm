@@ -1,38 +1,20 @@
 #include <iostream>
 #include <vector>
-#if 0
 int partition(std::vector<int> &vec, int p, int r) {
-        int x = vec[r];
-        int i = p - 1;
-        // next i is alway geater than x
-        // i to j is geater number,p to i is less number
-        // j to r - 1 is uncompared number
+        int pivot = vec[r];
+        int i = p;
+	// [i, j - 1] is greater set,the left of the set is the less number, 
+	// the right of the set is unordered number,the last one is the pivot number
+	// at last, swap (the left border of the set vec[i], privot number)
+	// and return the i
         for (int j = p; j < r; j++) {
                 if (vec[j] < x) {
-                        i++;
-                        std::swap(vec[i], vec[j]);
-
+                    std::swap(vec[i], vec[j]);
+		    i++;
                 }
         }
-	std::swap(vec[i + 1], vec[j]);
-        return i + 1;
-}
-#endif
-
-int partition(std::vector<int> &vec, int p, int r) {
-	int x = vec[r];
-	int i = p - 1;
-	// next i is alway geater than x
-	// i to j is geater number,p to i is less number
-	// j to r - 1 is uncompared number
-	for (int j = p; j <= r; j++) {
-		if (vec[j] <= x) {
-			i++;
-			std::swap(vec[i], vec[j]);
-
-		}
-	}
-	return i;
+	std::swap(vec[i], vec[r]);
+        return i;
 }
 
 void quicksort(std::vector<int> &vec, int p, int r) {
