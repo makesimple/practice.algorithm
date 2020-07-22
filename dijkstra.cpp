@@ -26,7 +26,7 @@ public:
         priority_queue<pair<double, int>> S;
         adj.resize(n);
         // 建立邻接表，如果不构建这个结构
-        // 后面每个u都需在所有的边中要查找包含u的边，时间复杂大。
+        // 后面每个u都需在所有的边中查找包含u的边，时间复杂大。
         for (int i = 0; i < edges.size(); i++) {
             adj[edges[i][0]].push_back({edges[i][1],succProb[i]});
             adj[edges[i][1]].push_back({edges[i][0],succProb[i]});
