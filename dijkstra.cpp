@@ -18,3 +18,34 @@
 //     更新。
 //   }
 //}
+class Solution {
+public:
+    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
+        vector<vector<pair<int, double>>> adj;
+        vector<double> dist;
+        priority_queue<pair<double, int>> S;
+        adj.resize(n);
+        // 建立邻接表，如果不构建这个结构
+        // 后面每个u都需在所有的边中要查找包含u的边，时间复杂大。
+        for (int i = 0; i < edges.size(); i++) {
+            adj[edges[i][0]].push_back({edges[i][1],succProb[i]});
+            adj[edges[i][1]].push_back({edges[i][0],succProb[i]});
+        }
+        S.push({1.0, start});
+        dist.resize(n);
+        dist[start] = 1.0;
+        while (S.size()) {
+            int u = S.top().second;
+            S.pop();
+            if (u == end)
+                return dist[end];
+            for (auto &v : adj[u]) {
+                if (v.second * dist[u] > dist[v.first]) {
+                    dist[v.first] = v.second * dist[u];
+                    S.push({dist[v.first], v.first});
+                }
+            }
+        }
+        return dist[end];
+    }
+};
