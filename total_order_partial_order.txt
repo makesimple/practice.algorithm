@@ -1,0 +1,24 @@
+https://eli.thegreenplace.net/2018/partial-and-total-orders/
+
+关系的属性：
+Properties of relations
+There are a number of useful properties relations could have. Here are just a few that we'll need for the rest of the article; for a longer list, see the Wikipedia page.
+
+Reflexive: every element in the set is related to itself, or . The == relation shown above is reflexive.
+
+Irreflexive: no element in the set is related to itself, or . For example if we define the < less than relation on numbers, it's irreflexive since no number is less than itself. In our boxes example, the "fits in" relation is irreflexive because no box can fit inside itself.
+
+Transitive: intuitively, "if x fits inside y, and y fits inside z, then x fits inside z". Mathematically . The < relation on numbers is obviously transitive.
+
+Symmetric: if x is related to y, then y is related to x. This might sound obvious with the colloquial meaning of "related", but not in the mathematical sense. Most relations we deal with aren't symmetric. The definition is . For example, the relation == is symmetric, but < is not symmetric.
+
+Antisymmetric: if x is related to y, then y is not related to x unless x and y are the same element; mathematically . For example, the relation  (less than or equal) is antisymmetric; if  and also  then it must be that x and y are the same number. The relation < is also antisymmetric, though in the empty sense because we won't be able to find any pair x and y to satisfy the left side of the definition; in logic this is called vacuously.
+
+
+
+
+
+
+
+偏序 (partial order) ：满足自反性，传递性，不满足对称性
+全序 （total order）：
