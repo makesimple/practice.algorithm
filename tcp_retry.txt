@@ -1,0 +1,12 @@
+tcp：
+一开始约定一个计数器的初始值，
+sender这边启用重发定时器（规定时内没有收到ack就是重发）
+
+如果receiver没有收到消息，自然不会有ack，sender定时器到时就会重发
+如果receiver收到消息，但是发出的ack被丢失，sender定时器到时，还是一样会重发，对sender来说是一样的。
+
+如果receiver收的消息id比期望值小，就认为是重复消息，发ack，但是不上传消息到上层。
+
+
+sender发一个消息后id++(不是重传)
+receiver收到一个非重复的消息后期望id++
